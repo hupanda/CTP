@@ -23,8 +23,10 @@ class DbConnector
 public:
 	int init(ConfigManager* instance);
 	int insert(CThostFtdcTradeField *pTrade);
+	int query(string date, string tradeId);
 	sql::Driver *driver;
-	sql::PreparedStatement *pstmt;
+	sql::PreparedStatement *insertStmt;
+	sql::PreparedStatement *queryStmt;
 	sql::Connection *con;
 };
 
