@@ -1,3 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1197,5): warning MSB8012: TargetPath(C:\Users\hupanda\CTP\ctp\CTP\x64\Release\CTP.exe) does not match the Linker's OutputFile property value (). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
-main.obj : error LNK2001: unresolved external symbol "public: static class CThostFtdcTraderApi * __cdecl CThostFtdcTraderApi::CreateFtdcTraderApi(char const *)" (?CreateFtdcTraderApi@CThostFtdcTraderApi@@SAPEAV1@PEBD@Z)
-CtpTraderSpi.exe : fatal error LNK1120: 1 unresolved externals

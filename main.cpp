@@ -10,6 +10,10 @@
 #include "ThostFtdcUserApiDataType.h"
 #include "ThostFtdcUserApiStruct.h"
 #include "CtpTraderSpi.h"
+#include "ConfigManager.h"
+#include "DbConnector.h"
+
+using namespace std;
 
 int main()
 {
@@ -17,20 +21,35 @@ int main()
   HRESULT hr = CoInitializeEx(0, COINIT_MULTITHREADED);   
   if (FAILED(hr))   
   {  
-    std::cout << "Failed to initialize COM library. Error code = 0x"
-              << std::hex << hr << std::endl;   
+    cout << "Failed to initialize COM library. Error code = 0x" << hex << hr << endl;   
     return hr;  
   }
-               
+  ConfigManager config;
+  if (config.init() < 0)
+  {
+	  cout << "Failed to initialize configuration. " << endl;
+	  return 0;
+  }
+
+  DbConnector conn;
+  if (conn.init(&config) < 0)
+  {
+	  cout << "Failed to initialize db connection. " << endl;
+	  return 0;
+  }
+
   try
   {
-	  const std::string tdflowpathstring = "C:/Users/hupanda/CTP/tdflow";
-	  const char * tdflowpath = tdflowpathstring.c_str();
+	  //const std::string tdflowpathstring = "C:/Users/hupanda/CTP/tdflow";
+	  const char * tdflowpath = config.flowPath.c_str();
 	  CThostFtdcTraderApi* api = CThostFtdcTraderApi::CreateFtdcTraderApi(tdflowpath);
 	  CtpTraderSpi spi;
 	  spi.set_m_ptrTraderApi(api);
+	  spi.set_m_config(&config);
+	  spi.set_m_conn(&conn);
 	  api->RegisterSpi(&spi);
-	  api->RegisterFront("tcp://58.246.171.3:52101");
+	  //api->RegisterFront("tcp://58.246.171.3:52101");
+	  api->RegisterFront((char *)config.brokerHost.c_str());
 	  api->SubscribePrivateTopic(THOST_TERT_RESTART);
 	  api->SubscribePublicTopic(THOST_TERT_RESTART);
 	  api->Init();
@@ -40,7 +59,6 @@ int main()
   {
 	  CoUninitialize();
   }
-
   return 0;
 }
 

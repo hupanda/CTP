@@ -75,11 +75,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\hupanda\CTP\boost_1_64_0\boost_1_64_0;C:\Program Files\MySQL\MySQL Connector C++ 1.1.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\MySQL\MySQL Connector C++ 1.1.9\include;C:\Users\hupanda\CTP\boost_1_64_0\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Program Files\MySQL\MySQL Connector C++ 1.1.9\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;mysqlconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\MySQL\MySQL Connector C++ 1.1.9\lib\opt;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,11 +126,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="CtpTraderSpi.cpp" />
+    <ClCompile Include="DbConnector.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="CtpTraderSpi.h" />
+    <ClInclude Include="DbConnector.h" />
     <ClInclude Include="ThostFtdcMdApi.h" />
     <ClInclude Include="ThostFtdcTraderApi.h" />
     <ClInclude Include="ThostFtdcUserApiDataType.h" />
